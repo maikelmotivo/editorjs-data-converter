@@ -39,6 +39,7 @@
         "illuminate/support": "^5.7"
     },
     "require-dev": {
+        "beyondcode/laravel-dump-server": "^1.2",
         "friendsofphp/php-cs-fixer": "^2.15",
         "phpunit/phpunit": "^7.0"
     },
