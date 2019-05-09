@@ -4,16 +4,19 @@
     "keywords": [
         "laravel",
         "editorjs",
-        ""
+        "motivo"
     ],
     "authors": [
         {
             "name": "Wouter van Marrum",
-            "email": "wouter@woutervm.com"
+            "email": "wouter@woutervm.com",
+            "homepage": "https://motivo.nl",
+            "role": "developer"
         },
         {
             "name": "Jelle",
-            "email": "jelle@motivo.nl"
+            "email": "jelle@motivo.nl",
+            "homepage": "https://motivo.nl"
         }
     ],
     "type": "library",
@@ -22,14 +25,32 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Motivo\\": "src/"
+            "Motivo\\EditorJsDataConverter\\": "src/"
         }
     },
-    "require": {},
+    "autoload-dev": {
+        "psr-4": {
+            "Motivo\\EditorJsDataConverter\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.1.3",
+        "ext-json": "*",
+        "illuminate/support": "^5.7"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpunit/phpunit": "^7.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "extra": {
         "laravel": {
             "providers": [
-                "Motivo\\EditorJsServiceProvider"
+                "Motivo\\EditorJsDataConverter\\EditorJsServiceProvider"
             ]
         }
     },
