@@ -1,0 +1,38 @@
+{
+    "name": "motivo/editorjs-data-converter",
+    "description": "A package to convert JSON data that Editor.js generates back to html so it can be used.",
+    "keywords": [
+        "laravel",
+        "editorjs",
+        ""
+    ],
+    "authors": [
+        {
+            "name": "Wouter van Marrum",
+            "email": "wouter@woutervm.com"
+        },
+        {
+            "name": "Jelle",
+            "email": "jelle@motivo.nl"
+        }
+    ],
+    "type": "library",
+    "license": "mpl-2.0",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Motivo\\": "src/"
+        }
+    },
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Motivo\\EditorJsServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+    }
+}
