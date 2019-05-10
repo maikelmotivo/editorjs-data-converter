@@ -12,6 +12,7 @@ class ListConverter implements Converter
     use WithHtml;
 
     private const UNORDERED_LIST = 'ul';
+
     private const ORDERED_LIST = 'ol';
 
     public function toHtml(array $itemData): string
