@@ -3,7 +3,6 @@
 namespace Motivo\EditorJsDataConverter\Converters;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Motivo\EditorJsDataConverter\Converters\Contracts\Converter;
 use Motivo\EditorJsDataConverter\Traits\WithHtml;
 
@@ -28,7 +27,7 @@ class TableConverter implements Converter
             foreach ($row as $columns) {
                 $columnElements .= $this->html
                     ->element('td')
-                    ->html(preg_replace_array('/(<([^>]+)>)/i', [""], $columns));
+                    ->html(preg_replace_array('/(<([^>]+)>)/i', [''], $columns));
             }
 
             $rowElements .= $this->html
