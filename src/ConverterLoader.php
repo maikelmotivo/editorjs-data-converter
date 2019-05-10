@@ -17,9 +17,11 @@ class ConverterLoader
 
     public function load()
     {
+        $projectConverterPath = app('config')['editorjs.converter_path'];
+
         $paths = array_unique(Arr::wrap([
             self::CONVERTER_PATH,
-            app('config')['editorjs.converter_path'],
+            $projectConverterPath,
         ]));
 
         $paths = array_filter($paths, function ($path) {
@@ -30,16 +32,22 @@ class ConverterLoader
             return null;
         }
 
-        $namespace = $this->namespace;
-
         $registeredConverters = new RegisteredConverters();
 
         /** @var \Symfony\Component\Finder\SplFileInfo $converter */
         foreach ((new Finder())->in($paths)->files() as $converter) {
+            $namespace = $this->namespace;
+            $basePath = __DIR__ . DIRECTORY_SEPARATOR;
+
+            if ($converter->getPath() === $projectConverterPath) {
+                $namespace = str_replace('\\', '', app()->getNamespace());
+                $basePath = app('path');
+            }
+
             $converter = $namespace . str_replace(
                 ['/', '.php'],
                 ['\\', ''],
-                Str::after($converter->getPathname(), dirname(__FILE__) . DIRECTORY_SEPARATOR)
+                Str::after($converter->getPathname(), $basePath)
             );
 
             if (is_subclass_of($converter, Converter::class)

@@ -20,6 +20,9 @@ class ImageConverter implements Converter
             ->addClass($this->getImageClasses($itemData));
     }
 
+    /**
+     * @throws \Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException
+     */
     private function getFileUrl(array $itemData): string
     {
         $fileData = Arr::get($itemData, 'file', []);
