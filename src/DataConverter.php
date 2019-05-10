@@ -4,14 +4,13 @@ namespace Motivo\EditorJsDataConverter;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Motivo\EditorJsDataConverter\Collections\RegisteredConverters;
+use Motivo\EditorJsDataConverter\Collections\RegisteredConvertersContract;
 use Motivo\EditorJsDataConverter\Converters\Contracts\Converter;
-use Motivo\EditorJsDataConverter\Exceptions\ConverterException;
 use Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException;
 
 class DataConverter
 {
-    /** @var RegisteredConverters */
+    /** @var RegisteredConvertersContract */
     private $registeredConverters;
 
     /** @var string */
@@ -20,48 +19,45 @@ class DataConverter
     /** @var array */
     private $blockData;
 
-    private function __construct(string $jsonData, ?RegisteredConverters $registeredConverters = null)
+    public function __construct(RegisteredConvertersContract $registeredConverters)
     {
-        $this->registeredConverters = collect($registeredConverters);
+        $this->registeredConverters = $registeredConverters;
+    }
 
+    public function init(string $jsonData): string
+    {
         $this->setBlockData($jsonData);
 
         $this->createHTmlString();
-    }
 
-    public static function create(string $jsonData): string
-    {
-        return (new static($jsonData))->getHtml();
+        return $this->getHtml();
     }
 
     private function createHTmlString(): void
     {
         foreach ($this->blockData as $item) {
-            dd($this->callConverter($item));
-
-            $this->setHtml($this->callConverter($item)->toHtml());
+            $this->setHtml(
+                $this->callConverter($item)->toHtml(
+                    $this->getItemData($item)
+                )
+            );
+            dd($this->getHtml());
         }
     }
 
-    private function callConverter(array $item): ?Converter
+    private function callConverter(array $item): Converter
     {
-        dump($item);
         $type = Arr::get($item, 'type');
 
         if (! $type) {
             InvalidEditorDataException::noTypeField('Type field not found for block item');
         }
 
-        $converter = Str::studly(Arr::get($item, 'type'));
+        $converter = Str::studly(Arr::get($item, 'type') . 'Converter');
 
-        dd($this->registeredConverters);
+        $converterClass = $this->registeredConverters->getConverter($converter);
 
-        if ($this->registeredConverters->has($converter)) {
-            dd($this->registeredConverters->get($converter));
-            return $this->registeredConverters->get($converter);
-        }
-
-        ConverterException::noConverterRegistered(sprintf('No converter registered for type `%s`', $type));
+        return new $converterClass;
     }
 
     public function setHtml(string $string): void
@@ -85,5 +81,14 @@ class DataConverter
         InvalidEditorDataException::noBlocksContent(
             'The `blocks` field is missing from the given content'
         );
+    }
+
+    private function getItemData(array $item): array
+    {
+        if (! Arr::exists($item, 'data')) {
+            InvalidEditorDataException::noDataField('No data field found for type `type`', Arr::get($item, 'type'));
+        }
+
+        return Arr::get($item, 'data');
     }
 }

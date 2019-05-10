@@ -15,4 +15,9 @@ class InvalidEditorDataException extends Exception
     {
         return new static($message, $code, $previous);
     }
+
+    public static function noDataField(string $message, int $code = 0, ?callable $previous = null)
+    {
+        return new static($message, $code, $previous);
+    }
 }
