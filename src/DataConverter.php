@@ -68,7 +68,7 @@ class DataConverter
 
         $converterClass = $this->registeredConverters->getConverter($converter, $type);
 
-        return new $converterClass;
+        return new $converterClass();
     }
 
     public function setHtml(string $string): void
@@ -90,6 +90,7 @@ class DataConverter
 
         if ($arrayDataCollection->has('blocks')) {
             $this->blockData = $arrayDataCollection->get('blocks');
+
             return;
         }
 

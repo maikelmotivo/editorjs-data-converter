@@ -75,6 +75,6 @@ return PhpCsFixer\Config::create()
         'yoda_style' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
-        ->exclude(['tests', 'storage', 'routes', 'resources', 'public', 'database', 'config', 'bootstrap'])
-        ->in(sprintf('%s/app', __DIR__))
+        ->exclude(['tests'])
+        ->in(sprintf('%s/src', __DIR__))
     );

@@ -20,6 +20,6 @@ class RegisteredConverters extends Collection implements RegisteredConvertersCon
 
         $converterClass = $this->get($key);
 
-        return new $converterClass;
+        return new $converterClass();
     }
 }

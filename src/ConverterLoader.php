@@ -35,8 +35,8 @@ class ConverterLoader
         $registeredConverters = new RegisteredConverters();
 
         /** @var \Symfony\Component\Finder\SplFileInfo $converter */
-        foreach ((new Finder)->in($paths)->files() as $converter) {
-            $converter = $namespace.str_replace(
+        foreach ((new Finder())->in($paths)->files() as $converter) {
+            $converter = $namespace . str_replace(
                 ['/', '.php'],
                 ['\\', ''],
                 Str::after($converter->getPathname(), dirname(__FILE__) . DIRECTORY_SEPARATOR)
