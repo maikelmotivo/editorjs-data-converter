@@ -3,8 +3,8 @@
 namespace Motivo\EditorJsDataConverter;
 
 use Illuminate\Support\ServiceProvider;
+use Motivo\EditorJsDataConverter\Collections\RegisteredConverters as RegisteredConvertersContract;
 use Motivo\EditorJsDataConverter\Collections\RegisteredConverters;
-use Motivo\EditorJsDataConverter\Collections\RegisteredConvertersContract;
 use Spatie\Html\HtmlServiceProvider;
 
 class EditorJsServiceProvider extends ServiceProvider

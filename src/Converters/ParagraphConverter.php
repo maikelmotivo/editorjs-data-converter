@@ -9,6 +9,8 @@ class ParagraphConverter implements Converter
 {
     public function toHtml(array $itemData): string
     {
-        return html()->element('p')->text(Arr::get($itemData, 'text', ''));
+        return html()
+            ->element('p')
+            ->text(Arr::get($itemData, 'text', ''));
     }
 }

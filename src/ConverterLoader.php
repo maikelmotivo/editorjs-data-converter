@@ -18,8 +18,8 @@ class ConverterLoader
     public function load()
     {
         $paths = array_unique(Arr::wrap([
+            self::CONVERTER_PATH,
             app('config')['editorjs.converter_path'],
-            self::CONVERTER_PATH
         ]));
 
         $paths = array_filter($paths, function ($path) {
