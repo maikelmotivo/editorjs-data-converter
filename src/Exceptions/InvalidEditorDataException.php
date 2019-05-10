@@ -16,7 +16,12 @@ class InvalidEditorDataException extends Exception
         return new static($message, $code, $previous);
     }
 
-    public static function noDataField(string $message, int $code = 0, ?callable $previous = null)
+    public static function noDataField(string $message, int $code = 0, ?callable $previous = null): self
+    {
+        return new static($message, $code, $previous);
+    }
+
+    public static function noImageUrlFound(string $message, int $code = 0, ?callable $previous = null): self
     {
         return new static($message, $code, $previous);
     }

@@ -4,12 +4,15 @@ namespace Motivo\EditorJsDataConverter\Converters;
 
 use Illuminate\Support\Arr;
 use Motivo\EditorJsDataConverter\Converters\Contracts\Converter;
+use Motivo\EditorJsDataConverter\Traits\WithHtml;
 
 class ParagraphConverter implements Converter
 {
+    use WithHtml;
+
     public function toHtml(array $itemData): string
     {
-        return html()
+        return $this->html
             ->element('p')
             ->text(Arr::get($itemData, 'text', ''));
     }
