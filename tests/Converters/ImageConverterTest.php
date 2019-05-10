@@ -115,7 +115,7 @@ class ImageConverterTest extends TestCase
         $this->assertStringContainsString(Arr::get($data, 'file.url'), $imageString);
     }
 
-    private function createExpectedResult(array $data, string $imageString)
+    private function createExpectedResult(array $data, string $imageString): void
     {
         foreach ($this->expectedModifiers as $expectedResultModifier => $modifierData) {
             $tagData = $this->getModifierData($data, $expectedResultModifier);
@@ -130,7 +130,7 @@ class ImageConverterTest extends TestCase
         }
     }
 
-    private function getModifierData(array $data, string $key)
+    private function getModifierData(array $data, string $key): string
     {
         if (Arr::has($data, $key)) {
             $modifierKey = Arr::get($this->expectedModifiers, $key);
