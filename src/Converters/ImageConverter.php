@@ -20,7 +20,8 @@ class ImageConverter implements Converter
 
         return $this->html
             ->img($fileUrl, Arr::get($itemData, 'caption', ''))
-            ->addClass($this->getImageClasses($itemData));
+            ->addClass($this->getImageClasses($itemData))
+            ->addClass('img-fluid');
     }
 
     /**
