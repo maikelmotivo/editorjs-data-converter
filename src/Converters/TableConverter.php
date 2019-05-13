@@ -14,7 +14,7 @@ class TableConverter implements Converter
     {
         $content = $this->createHtmlContent(Arr::get($itemData, 'content', []));
 
-        return $this->html->element('table')->html($content);
+        return $this->html->element('table')->html($content)->addClass('table table-bordered table-hover');
     }
 
     protected function createHtmlContent(array $contentData)

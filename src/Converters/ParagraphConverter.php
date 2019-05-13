@@ -14,6 +14,6 @@ class ParagraphConverter implements Converter
     {
         return $this->html
             ->element('p')
-            ->text(Arr::get($itemData, 'text', ''));
+            ->html(Arr::get($itemData, 'text', ''));
     }
 }
