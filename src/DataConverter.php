@@ -22,7 +22,6 @@ class DataConverter
     public function __construct(RegisteredConverters $registeredConverters)
     {
         $this->registeredConverters = $registeredConverters;
-        dd($registeredConverters);
     }
 
     /**

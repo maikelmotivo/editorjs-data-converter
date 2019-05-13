@@ -11,6 +11,9 @@ class ImageConverter implements Converter
 {
     use WithHtml;
 
+    /**
+     * @throws \Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException
+     */
     public function toHtml(array $itemData): string
     {
         $fileUrl = $this->getFileUrl($itemData);
@@ -23,7 +26,7 @@ class ImageConverter implements Converter
     /**
      * @throws \Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException
      */
-    private function getFileUrl(array $itemData): string
+    protected function getFileUrl(array $itemData): string
     {
         $fileData = Arr::get($itemData, 'file', []);
 
@@ -36,7 +39,7 @@ class ImageConverter implements Converter
         return Arr::get($fileData, 'url');
     }
 
-    private function getImageClasses(array $itemData): string
+    protected function getImageClasses(array $itemData): string
     {
         $imageClasses = '';
 

@@ -17,7 +17,7 @@ class TableConverter implements Converter
         return $this->html->element('table')->html($content);
     }
 
-    private function createHtmlContent(array $contentData)
+    protected function createHtmlContent(array $contentData)
     {
         $rowElements = '';
 
