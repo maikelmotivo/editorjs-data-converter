@@ -32,7 +32,7 @@ class ListConverter implements Converter
         $listItems = '';
 
         foreach (Arr::get($itemData, 'items') as $item) {
-            $listItems .= $this->html->element('li')->text($item);
+            $listItems .= $this->html->element('li')->html($item);
         }
 
         return $listElement->html($listItems);

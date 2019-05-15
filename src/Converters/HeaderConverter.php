@@ -14,6 +14,6 @@ class HeaderConverter implements Converter
     {
         return $this->html
             ->element(sprintf('h%s', Arr::get($itemData, 'level', '1')))
-            ->text(Arr::get($itemData, 'text', ''));
+            ->html(Arr::get($itemData, 'text', ''));
     }
 }
