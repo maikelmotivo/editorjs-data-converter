@@ -3,6 +3,7 @@
 namespace Motivo\EditorJsDataConverter\Converters;
 
 use Motivo\EditorJsDataConverter\Converters\Contracts\Converter;
+use Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException;
 use Motivo\EditorJsDataConverter\Traits\WithHtml;
 use Spatie\Html\Elements\Element;
 use Illuminate\Support\Arr;
@@ -13,6 +14,8 @@ class EmbedConverter implements Converter
 
     public function toHtml(array $itemData): string
     {
+        $this->validate($itemData);
+
         $container = $this->getContainer();
 
         $iframe = $this->getIframe(Arr::get($itemData, 'service'), Arr::get($itemData, 'embed'));
@@ -58,5 +61,20 @@ class EmbedConverter implements Converter
         ];
 
         return $this->html->element('iframe')->attributes($attrs)->class('embed-responsive-item');
+    }
+
+    private function validate(array $itemData): void
+    {
+        if (! Arr::has($itemData, 'service')) {
+            throw InvalidEditorDataException::noEmbedServiceFound('No embed service found');
+        }
+
+        if (! Arr::has($itemData, 'embed')) {
+            throw InvalidEditorDataException::noEmbedUrlFound('No embed url found');
+        }
+
+        if (! method_exists(EmbedConverter::class, 'get' . ucfirst(Arr::get($itemData, 'service')))) {
+            throw InvalidEditorDataException::embedServiceNotSupported('Embed service \'' . Arr::get($itemData, 'service') . '\' not supported');
+        }
     }
 }
