@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Motivo\EditorJsDataConverter\Tests\Converters;
-
 
 use Illuminate\Support\Arr;
 use Motivo\EditorJsDataConverter\Converters\EmbedConverter;
@@ -64,7 +62,7 @@ class EmbedConverterTest extends TestCase
             $this->expectExceptionMessage('No embed service found');
         } elseif (! in_array(Arr::get($data, 'service'), $supportedServices)) {
             $this->expectException(InvalidEditorDataException::class);
-            $this->expectExceptionMessage('Embed service \'' . Arr::get($data, 'service') . '\' not supported');
+            $this->expectExceptionMessage(sprintf('Embed service %s not supported', Arr::get($data, 'service')));
         } elseif (! Arr::has($data,'embed')) {
             $this->expectException(InvalidEditorDataException::class);
             $this->expectExceptionMessage('No embed url found');

@@ -74,7 +74,7 @@ class EmbedConverter implements Converter
         }
 
         if (! method_exists(EmbedConverter::class, 'get' . ucfirst(Arr::get($itemData, 'service')))) {
-            throw InvalidEditorDataException::embedServiceNotSupported('Embed service \'' . Arr::get($itemData, 'service') . '\' not supported');
+            throw InvalidEditorDataException::embedServiceNotSupported(sprintf('Embed service %s not supported', Arr::get($itemData, 'service')));
         }
     }
 }
