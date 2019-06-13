@@ -25,4 +25,19 @@ class InvalidEditorDataException extends Exception
     {
         return new static($message, $code, $previous);
     }
+
+    public static function noEmbedServiceFound(string $message, int $code = 0, ?callable $previous = null): self
+    {
+        return new static($message, $code, $previous);
+    }
+
+    public static function noEmbedUrlFound(string $message, int $code = 0, ?callable $previous = null): self
+    {
+        return new static($message, $code, $previous);
+    }
+
+    public static function embedServiceNotSupported(string $message, int $code = 0, ?callable $previous = null): self
+    {
+        return new static($message, $code, $previous);
+    }
 }
