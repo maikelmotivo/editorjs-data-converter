@@ -2,11 +2,11 @@
 
 namespace Motivo\EditorJsDataConverter\Converters;
 
+use Illuminate\Support\Arr;
 use Motivo\EditorJsDataConverter\Converters\Contracts\Converter;
 use Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException;
 use Motivo\EditorJsDataConverter\Traits\WithHtml;
 use Spatie\Html\Elements\Element;
-use Illuminate\Support\Arr;
 
 class EmbedConverter implements Converter
 {
